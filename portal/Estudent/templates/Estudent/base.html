@@ -1,0 +1,137 @@
+{% load static %}                                                                                                {% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    
+    <style>
+        .sidenav{
+            width: 220px;
+            top:0px;
+            left: 0px;
+            box-shadow:  1px 1px 3px rgb(155, 155, 155);
+            height: 100%;
+            padding: 0px;
+            position: fixed;
+        }
+        .sidenav a{
+            display: block;
+            text-decoration: none;  
+            padding: 9px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: rgb(0, 0, 0);
+            margin-left: 0px;
+            cursor: pointer;
+        }
+        .sidenav a:hover{
+            background-color: rgb(231, 231, 231);
+        }
+        .logo {
+            width: 100%;
+            height: 70px;
+            text-align: center;
+            padding: 2px;
+        }
+        .logo img {
+            width: 100px;
+            height: 80px;
+            margin: 0px;
+        }
+        .logo a:hover{
+            background-color: white;
+        }
+        br{
+            margin: 0px;
+        }
+        .main{
+            width: calc(100% - 220px);
+        }
+        .mainbar{
+            height: 55px;
+            width: calc(100% - 220px);
+            top: 0px;
+            right: 0px;
+            position: fixed;
+            box-shadow: 1px 1px 3px rgb(155, 155, 155);
+            
+        }
+        i{
+            cursor: pointer;
+            width: 60px;
+        }
+        .content{
+            width: 97%;
+            box-shadow: 1px 2px 3px;
+            min-height: 150px;
+            margin-top: 65px;
+            margin-left: 230px;
+            padding-bottom: 2px;
+            border-radius: 4px;
+        }
+        .content-header{
+            background-color: #17a2b8;
+            height: 40px;
+            border-radius: 4px;
+            display: flex;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div class="sidenav">
+        <div class="logo">
+            <a href="/home/" class="tohome"><img src="{% static 'Estudent/astu_logo.svg' %}" alt="logo" ></a>
+        </div>
+        <br>
+        <hr>
+        <nav>
+            <a href="/studProfile/"><i class="glyphicon glyphicon-user" style="width:20px;"></i>Student Profile</a>
+            <a href="">Enrolment Records</a>
+            <a href="">Academic History</a>
+            <a href="">Academics</a>
+            <a href="">Request</a>
+            <a href="">Dormitary</a>
+        </nav>
+    </div>
+    <div class="main">
+        <div class="mainbar">
+            <i class="fa fa-bars" id="navs" onclick="" style="margin: 20px;"></i>
+            <i class="glyphicon glyphicon-user" style="float: right; margin: 20px; margin-right: -25px;"></i>
+        </div>
+        <div class="content" id="content">
+            <div class="content-header">
+                {% block content_header %}
+
+                {% endblock %}
+            </div>
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <script>
+    document.getElementById("navs").addEventListener("click", function() {
+        var sidenav = document.querySelector(".sidenav");
+        var main = document.querySelector(".main");
+        var mainbar = document.querySelector(".mainbar")
+        var content = document.querySelector(".content")
+        if (sidenav.style.display === "none") {
+            sidenav.style.display = "block";
+            main.style.width = "calc(100% - 220px)";
+            mainbar.style.width = "calc(100% - 220px)";
+            content.style.marginLeft = "230px";
+            
+        } else {
+            sidenav.style.display = "none";
+            content.style.marginLeft = "15px";
+            main.style.width = "100%";
+            mainbar.style.width = "100%";
+
+        }
+    });
+</script>
+</body>
+</html>

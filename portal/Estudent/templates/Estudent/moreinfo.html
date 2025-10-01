@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    form {
+        width: 400px;
+        margin: 20px auto;
+        padding: 20px;
+        border: 1px solid #ffffff;
+        border-radius: 0px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #ff0000;
+        font-size: 30px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-shadow: black 1px 1px 3px;
+    }
+    label {
+        margin-bottom: 8px;
+        font-weight: bold;
+    }
+    input, select {
+        width: calc(100% - 20px);
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #218838;
+    }
+</style>
+<body>
+    <form action="/register/" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Student Registration</h2>
+        {{form.as_p}}
+       
+        <button type="submit" name="Submit">Register</button> 
+    </form>
+</body>
+</html>

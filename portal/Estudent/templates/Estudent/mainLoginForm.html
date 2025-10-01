@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+        <style>
+        form{
+            width: 300px;
+            padding: 30px;
+            background: #eee;
+            margin: 10% auto;
+            border-radius: 5px;
+            border: solid rgb(190, 190, 190) 1px;
+            box-shadow: 1px 2px 3px;
+        }
+        form h2{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form input{
+            width: 92%;
+            height: 30px;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            padding-left: 10px;
+        }
+        form label{
+            font-weight: bold;
+            width: 100px;
+        }
+        form button{
+            width: 120px;
+            height: 40px;
+            background: #1c59ff;
+            color: #fff;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 3px;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h2>Login</h2>
+        <label for="username">Username:</label>
+        <input type="text" name="username" class="username" placeholder="Username">
+        <label for="password">Password:</label>
+        <input type="password" name="password" placeholder="Password">
+        <button type="submit" name="login">Login</button>
+    </form>
+</body>
+</html>

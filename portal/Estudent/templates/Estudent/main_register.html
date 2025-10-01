@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        .main{
+            display: flex;
+        }
+        .mainbar{
+            height: 55px;
+            width: 100% ;
+            top: 0px;
+            right: 0px;
+            position: fixed;
+            box-shadow: 1px 1px 3px rgb(155, 155, 155);
+            
+        }
+        form{
+            width: 300px;
+            padding: 30px;
+            background: #eee;
+            margin: 10% auto;
+            border-radius: 5px;
+            border: solid rgb(190, 190, 190) 1px;
+            box-shadow: 1px 2px 3px;
+        }
+        form h2{
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form ul{
+            display: none;
+        }
+        form input{
+            width: 93%;
+            height: 30px;
+            border: 1px solid #adadad;
+            margin: 10px 0;
+            padding-left: 10px;
+        }
+        form label{
+            font-weight: bold;
+            width: 100px;
+        }
+        form button{
+            width: 120px;
+            height: 40px;
+            background: #333;
+            color: #fff;
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="mainbar">
+            <i class="fa fa-bars" id="navs" onclick="" style="margin: 20px;"></i>
+            <i class="glyphicon glyphicon-user" style="float: right; margin: 20px; margin-right: -25px;"></i>
+        </div>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form}}
+            <button type="submit" value="Register">Register</button>
+        </form>
+    </div>
+</body>
+</html>

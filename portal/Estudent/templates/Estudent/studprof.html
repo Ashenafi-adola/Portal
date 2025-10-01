@@ -1,0 +1,143 @@
+{% extends 'Estudent/base.html' %}
+{% load static %}
+{% block content_header %}
+<p style="margin: 10px; display: inline;"><i class="glyphicon glyphicon-user" style="margin: 2px; margin-right: -38px;"></i>Student Profile</p>
+{% endblock %}
+
+{% block content %}
+<style>
+    .photo{
+        width: 200px;
+        max-width: 1fr;
+        height: auto;
+        display: inline-block;
+        border: solid rgb(163, 163, 163) 1px;
+        margin-bottom: 10px;
+        flex-grow: 1;
+    }
+    .photo img {
+        width: 100%;
+        height: 100%;
+        overflow-y: hidden;
+    }
+    .details{
+        display: flex;
+        flex-wrap: wrap;
+        flex-grow: 2;
+    }
+    .stud-info{
+        height: auto;
+        flex-grow: 4;
+        display: inline-block;
+        padding: 0px;
+    }
+    .stud-info p{
+        margin: 8px;
+        padding: 2px;
+    }
+    .links {
+        flex-wrap: wrap;
+        margin: 10px;
+        padding: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        display: flex;
+    }
+    .links a {
+        margin: 5px;
+        padding-right: 20px;
+        margin-bottom: 0px;
+        height: 25px;
+        text-decoration: none;
+        text-align: left;
+        color: rgb(0, 119, 255);
+    }
+    .links a:hover{
+        border: solid rgb(224, 224, 224) 1px;
+    }
+    .links a:active{
+        border: solid rgb(224, 224, 224) 1px;
+    }
+    .info{
+        height: auto;
+        display: flex;
+        border: solid rgb(224, 224, 224) 1px;
+        margin: 10px;
+        margin-top: 0px;
+        padding: 10px;
+        flex-wrap: wrap;
+
+    }
+    .Edit{
+        width: 100%;
+        border: none;
+        text-align: left;
+        padding: 9px;
+        background-color: rgba(0, 0, 0, .03);
+        box-shadow: 2px 2px 2px rgba(180, 180, 180, 0.4);
+        margin: 0px;
+        font-size: 17px;
+        color: rgb(0, 119, 255);
+    }
+    .Update{
+        width: 110%;
+        height: auto;
+        margin: 0px;
+        margin-top: 20px;
+    }
+</style>
+<div class="links">
+    <a href="/studProfile/">Personal</a>
+    <a href="/applicant/">Applicant</a>
+    <a href="">Contact Address</a>
+    <a href="">Emergency Contact</a>
+    <a href="">Family Background</a>
+    <a href="">Education</a>
+    <a href="">Expriance</a>
+    <a href="">Program Preferance</a>
+</div>
+<div class="info">
+    <div class="photo">
+        <img src="{{ a.Photo.url }}" alt="">
+    </div>
+    <div class="details">
+        <div class="stud-info">
+            <p ><b>User: </b>{{b.Identity_Card}}</p>
+            <p ><b>First Name:</b> {{a.Name}}</p>
+            <p ><b>Father Name:</b> {{a.Father}}</p>
+            <p><b>Grand Father Name: </b>{{a.Grand_Father}}</p>
+            <p><b>ሙሉ ስም: </b>{{a.ሙሉ_ስም}}</p>
+            <p><b>Gender: </b>{{a.Gender}}</p>
+            <p><b>Marital Status: </b>{{a.Marital_Status}}</p>
+        </div>
+        <div class="stud-info">
+            <p ><b>Nationality: </b>{{a.Nationality}}</p>
+            <p ><b>Region:</b> {{a.Region}}</p>
+            <p ><b>Disablity:</b> {{a.Disability}}</p>
+            <p><b>Date Of Birth: </b>{{a.Date_Of_Birth}}</p>
+            <p><b>Full Name In Amharic: </b>{{a.ሙሉ_ስም}}</p>
+            <p><b>Place Of Birth: </b>{{a.Place_Of_Birth}}</p>
+        </div>
+    </div>
+    <div class="Update">
+        <button class="Edit">Edit</button>
+    </div>
+</div>
+<script>
+    
+    document.getElementById("content").addEventListener("change", function() {
+        var photo = document.querySelector(".photo");
+        var content = document.querySelector("..content");
+        if (content.style.width > "805px") {
+            photo.style.maxWidth = "220px";
+            
+        } else if (content.style.width < "745px") {
+            photo.style.maxWidth = "fit-content";
+            photo.style.flexGrow = "1";
+
+        }
+    });
+</script>
+
+    
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends 'Estudent/base.html' %}
+{% load static %}
+{% block content_header %}
+<p style="margin: 10px; display: inline;"><i class="glyphicon glyphicon-user" style="margin: 2px; margin-right: -38px;"></i>Student Profile</p>
+{% endblock %}
+
+{% block content %}
+<style>
+    .details{
+        height: auto;
+        display: flex;
+        margin: 0px;
+        padding: 0px;
+        flex-wrap: wrap;
+        flex-grow: 2;
+    }
+    .stud-info p{
+        margin: 2px;
+        margin-left: 10px;
+        padding: 2px;
+    }
+    .links {
+        flex-wrap: wrap;
+        margin: 10px;
+        padding: 10px;
+        padding-bottom: 0px;
+        margin-bottom: 0px;
+        display: flex;
+    }
+    .links a {
+        margin: 5px;
+        padding-right: 20px;
+        margin-bottom: 0px;
+        height: 25px;
+        text-decoration: none;
+        text-align: left;
+        color: rgb(0, 119, 255);
+    }
+    .links a:hover{
+        border: solid rgb(224, 224, 224) 1px;
+    }
+    .links a:active{
+        border: solid rgb(224, 224, 224) 1px;
+    }
+    .info{
+        height: auto;
+        display: flex;
+        border: solid rgb(224, 224, 224) 1px;
+        margin: 10px;
+        margin-top: 0px;
+        padding: 10px;
+        flex-wrap: wrap;
+
+    }
+    .Edit{
+        width: 100%;
+        border: none;
+        text-align: left;
+        padding: 9px;
+        background-color: rgba(0, 0, 0, .03);
+        box-shadow: 2px 2px 2px rgba(180, 180, 180, 0.4);
+        margin: 0px;
+        font-size: 17px;
+        color: rgb(0, 119, 255);
+    }
+    .Update{
+        width: 110%;
+        height: auto;
+        margin: 0px;
+        margin-top: 20px;
+    }
+</style>
+<div class="links">
+    <a href="/studProfile/">Personal</a>
+    <a href="/applicant/">Applicant</a>
+    <a href="">Contact Address</a>
+    <a href="">Emergency Contact</a>
+    <a href="">Family Background</a>
+    <a href="">Education</a>
+    <a href="">Expriance</a>
+    <a href="">Program Preferance</a>
+</div>
+<div class="info">
+    <div class="details">
+        <div class="stud-info">
+            <p ><b>Id Number: </b>{{b.Identity_Card}}</p>
+            <p ><b>School:</b> {{b.Program}}</p>
+            <p ><b>Admission:</b> {{b.Admission}}</p>
+            <p><b>Class Year: </b>{{b.ClassYear}}</p>
+            <p><b>Program: </b>{{b.Program}}</p>
+            <p><b>Academic Year: </b>{{a.ClassYear}}</p>
+            <p><b>Registration Number: </b>{{a.Registration_Number}}</p>
+            <p ><b>Nationality: </b>{{a.Nationality}}</p>
+            <p ><b>Marticulation Result:</b> {{a.Matric_Result}}</p>
+            <p ><b>Tuition Type:</b> {{a.Disability}}</p>
+        </div>
+    </div>
+    <div class="Update">
+        <button class="Edit">Edit</button>
+    </div>
+</div>
+
+
+    
+{% endblock %}
