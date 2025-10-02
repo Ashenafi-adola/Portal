@@ -35,23 +35,20 @@ def mainLogin(request):
         password = request.POST.get("password")
         user = authenticate(request,username=username, password= password)
         if user is not None:
-            login(request)
+            login(user)
             return redirect('register')
     return render(request,'Estudent/mainLoginForm.html',{})
 
 
 key = 0
 def login(request):
-    global key
-    global b
-    key = 0
-    more = MoreInfo.objects.all()
     if request.method == 'POST':
-        for  i in more:
-            if i.Identity_Card == request.POST.get("Username") and i.Password == request.POST.get("password"):
-                key = i.No
-                b = i
-                return HttpResponseRedirect(f"/home/")
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request,username=username, password= password)
+        if user is not None:
+            login(user)
+            return redirect('home')
 
     return render(request, "Estudent/login.html", {})
 
@@ -59,14 +56,17 @@ def registration(request):
     if request.method == 'POST':
         form = RegistForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.user = request.user
+            user.save()
+            return render(request, "Estudent/main_register.html",context)
     else:
         form = RegistForm()
         
     return render(request, "Estudent/registration.html",{"form":form})
 
 def Additional(request):
-    students = Student_informations.objects.all().order_by('Name','Father','Grand_Father')
+    students = User.objects.all()
     n = 76387
     pk = 1
     for student in students:
@@ -82,6 +82,8 @@ def Additional(request):
                 Section =  3,
                 No = pk,
             )
+            student.username = f'ugr/{n}/18'
+            student.password = str(n)
             student.No = pk
             student.save()
             pk += 1
