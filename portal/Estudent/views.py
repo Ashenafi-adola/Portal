@@ -9,7 +9,6 @@ from django.contrib.auth import authenticate, login, logout
 
 # Create your views here.
 
-
 def mianRegistration(request):
     form = UserCreationForm()
     if request.method == "POST":
@@ -33,68 +32,73 @@ def mainLogin(request):
     if request.method == 'POST':
         username = request.POST.get("username")
         password = request.POST.get("password")
-        user = authenticate(request,username=username, password= password)
+        user = authenticate(request, username=username,password=password)
         if user is not None:
-            login(user)
+            login(request,user)
             return redirect('register')
-    return render(request,'Estudent/mainLoginForm.html',{})
+    context = {
 
-
-key = 0
-def login(request):
-    if request.method == 'POST':
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        user = authenticate(request,username=username, password= password)
-        if user is not None:
-            login(user)
-            return redirect('home')
-
-    return render(request, "Estudent/login.html", {})
-
+    }
+    return render(request, 'Estudent/mainLoginForm.html', context)
 def registration(request):
-    if request.method == 'POST':
-        form = RegistForm(request.POST, request.FILES)
+    form = RegistForm()
+    if request.method == "POST":
+        form = RegistForm(request.POST,request.FILES)
         if form.is_valid():
-            user = form.save(commit=False)
-            user.user = request.user
-            user.save()
-            return render(request, "Estudent/main_register.html",context)
-    else:
-        form = RegistForm()
-        
-    return render(request, "Estudent/registration.html",{"form":form})
+            student = form.save(commit=False)
+            student.user = request.user
+            student.save()
+            return redirect('success')
+
+    context = {
+        "form":form,
+    }
+    return render(request,'Estudent/registration.html', context)
 
 def Additional(request):
     students = User.objects.all()
-    n = 76387
-    pk = 1
-    for student in students:
-        if student not in MoreInfo.objects.all():
-            student.moreinfo_set.create(
-                Password = str(n),
-                Identity_Card = f"ugr/{n}/18",
-                Dormitary = "B371 R32",
-                AdmissionYear = str(date.today()),
-                Program =  "Freshman Program",
-                Admission = "Undergraduate",
-                ClassYear =  str(date.today()),
-                Section =  3,
-                No = pk,
-            )
-            student.username = f'ugr/{n}/18'
-            student.password = str(n)
-            student.No = pk
-            student.save()
-            pk += 1
-            n += 1
-    return HttpResponse("registration compelete")
+    n = 44334
+    if request.method == 'POST':
+        for student in students:
+            if student.username == "ashu":
+                pass
+            else:
+                student.moreinfo_set.create(
+                    user = request.user,
+                    Password = str(n),
+                    Identity_Card = f'ugr/{n}/18',
+                    Dormitary = "none",
+                    AdmissionYear = str(date.today())[:4],
+                    Program = "Freshman division",
+                    Admission = "Undergraduate",
+                    ClassYear = str(date.today())[:4],
+                    Section = "4",
+                )
+                student.username = f'ugr/{n}/18'
+                student.password = str(n)
+                student.save()
+                n += 1
+
+    return render(request,'Estudent/complete.html',{})
+
+def signin(request):
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            print("logedin")
+            #login(request,user)
+            #return redirect('home')
+    return render(request,'Estudent/login.html',{})
+
 def home(request):
-    a = Student_informations.objects.get(No=key)
-    return render(request, "Estudent/home.html",{"a":a,"b":b})
-def studentProfile(request):
-    a = Student_informations.objects.get(No=key)
-    return render(request, "Estudent/studprof.html", {"a":a,"b":b})
-def appilicant(request):
-    a = Student_informations.objects.get(No=key)
-    return render(request, "Estudent/applicant.html", {"a":a, "b":b})
+    aboutStudent = Student_informations.objects.get(user = request.user)
+    moreAboutStudent = MoreInfo.objects.get(user = request.user)
+
+    context = {
+        "a":aboutStudent,
+        "m":moreAboutStudent,
+
+    }
+    return render(request,'Estudent/home.html',context)

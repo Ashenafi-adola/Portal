@@ -5,7 +5,7 @@ class RegistForm(forms.ModelForm,forms.Form):
     class Meta:
         model = Student_informations
         fields = "__all__"
-        exclude = ["No","user"]
+        exclude = ["user"]
         widgets = {
             'Name': forms.TextInput(attrs={'class': 'form-control'}),
             'Father': forms.TextInput(attrs={'class': 'form-control'}),

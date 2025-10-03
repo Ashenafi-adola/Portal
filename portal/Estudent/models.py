@@ -63,10 +63,8 @@ class Student_informations(models.Model):
     Work_Tel_Phone = models.IntegerField(null=True)
     Woreda = models.CharField(null=True)
     Kebele = models.CharField(null=True)
-    No = models.IntegerField(null=True)
 class MoreInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    studentInformations = models.ForeignKey(Student_informations, on_delete=models.CASCADE)
     Password = models.CharField(unique=False, max_length=20)
     Identity_Card = models.CharField(max_length=20,null=True)
     Dormitary = models.CharField(max_length=10,)
@@ -75,4 +73,3 @@ class MoreInfo(models.Model):
     Admission = models.CharField(max_length=255,null=True)
     ClassYear = models.CharField(20,null=True)
     Section = models.CharField(20,null=True)
-    No = models.IntegerField(null=True)
