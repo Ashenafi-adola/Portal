@@ -41,7 +41,7 @@ def mainLogin(request):
 
     }
     return render(request, 'Estudent/mainLoginForm.html', context)
-@login_required(login_url='')
+@login_required(login_url='mainLogin')
 def registration(request):
     form = RegistForm()
     if request.method == "POST":
@@ -91,7 +91,7 @@ def signin(request):
             return redirect('home')
     return render(request,'Estudent/login.html',{})
 
-@login_required(login_url='')
+@login_required(login_url='login')
 def home(request):
     aboutStudent = Student_informations.objects.get(user = request.user)
     moreAboutStudent = MoreInfo.objects.get(user = request.user)
@@ -103,3 +103,27 @@ def home(request):
 
     }
     return render(request,'Estudent/home.html',context)
+@login_required(login_url='login')
+def studentProfile(request):
+    aboutStudent = Student_informations.objects.get(user = request.user)
+    moreAboutStudent = MoreInfo.objects.get(user = request.user)
+    student = request.user
+    context = {
+        "a":aboutStudent,
+        "m":moreAboutStudent,
+        "student":student,
+
+    }
+    return render(request, 'Estudent/studprof.html',context)
+
+def appilicant(request):
+    aboutStudent = Student_informations.objects.get(user = request.user)
+    moreAboutStudent = MoreInfo.objects.get(user = request.user)
+    student = request.user
+    context = {
+        "a":aboutStudent,
+        "m":moreAboutStudent,
+        "student":student,
+
+    }
+    return render(request, 'Estudent/applicant.html',context)
