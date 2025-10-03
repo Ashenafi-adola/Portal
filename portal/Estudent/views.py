@@ -6,6 +6,7 @@ from datetime import date
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -40,6 +41,7 @@ def mainLogin(request):
 
     }
     return render(request, 'Estudent/mainLoginForm.html', context)
+@login_required(login_url='')
 def registration(request):
     form = RegistForm()
     if request.method == "POST":
@@ -65,8 +67,6 @@ def Additional(request):
             else:
                 student.moreinfo_set.create(
                     user = request.user,
-                    Password = str(n),
-                    Identity_Card = f'ugr/{n}/18',
                     Dormitary = "none",
                     AdmissionYear = str(date.today())[:4],
                     Program = "Freshman division",
@@ -75,7 +75,6 @@ def Additional(request):
                     Section = "4",
                 )
                 student.username = f'ugr/{n}/18'
-                student.password = str(n)
                 student.save()
                 n += 1
 
@@ -88,17 +87,19 @@ def signin(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             print("logedin")
-            #login(request,user)
-            #return redirect('home')
+            login(request,user)
+            return redirect('home')
     return render(request,'Estudent/login.html',{})
 
+@login_required(login_url='')
 def home(request):
     aboutStudent = Student_informations.objects.get(user = request.user)
     moreAboutStudent = MoreInfo.objects.get(user = request.user)
-
+    student = request.user
     context = {
         "a":aboutStudent,
         "m":moreAboutStudent,
+        "student":student,
 
     }
     return render(request,'Estudent/home.html',context)

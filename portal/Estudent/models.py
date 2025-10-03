@@ -65,8 +65,6 @@ class Student_informations(models.Model):
     Kebele = models.CharField(null=True)
 class MoreInfo(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    Password = models.CharField(unique=False, max_length=20)
-    Identity_Card = models.CharField(max_length=20,null=True)
     Dormitary = models.CharField(max_length=10,)
     AdmissionYear = models.CharField(max_length=10,null=True)
     Program = models.CharField(max_length=255,null=True)
